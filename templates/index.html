@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Free Tamil Ebooks - Send to Kindle</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Free Tamil Ebooks" />
+    <meta property="og:description" content="For Android, iOS, Kindle and PDF readers." />
+    <meta property="og:url" content="http://freetamilebooks.com/" />
+    <meta property="og:site_name" content="Free Tamil Ebooks" />
+    <meta property="og:image" content="https://i0.wp.com/freetamilebooks.com/wp-content/uploads/2014/12/cropped-FTE-logo.jpg?fit=200%2C200" />
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="200" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:site" content="@FreeTamilEbooks" />
+    <link rel="icon" href="https://i0.wp.com/freetamilebooks.com/wp-content/uploads/2014/12/cropped-FTE-logo.jpg?fit=32%2C32" sizes="32x32" />
+    <link rel="icon" href="https://i0.wp.com/freetamilebooks.com/wp-content/uploads/2014/12/cropped-FTE-logo.jpg?fit=192%2C192" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="https://i0.wp.com/freetamilebooks.com/wp-content/uploads/2014/12/cropped-FTE-logo.jpg?fit=180%2C180" />
+    <meta name="msapplication-TileImage" content="https://i0.wp.com/freetamilebooks.com/wp-content/uploads/2014/12/cropped-FTE-logo.jpg?fit=270%2C270" />
+  </head>
+  <body>
+    <header>SENT TO KINDLE</header>
+    <form id="upload-form" class="topBefore" action="" method=post enctype=multipart/form-data>    
+      <input name="file_url" id="file_url" type="hidden">
+      <input name="file_name" id="file_name" type="hidden">
+      <input name="email" type="email" placeholder="your_email@kindle.com" required>
+      <input name="submit" id="submit" type="submit" value="GO!" style="background-color: aqua;">
+    </form>
+  </body>
+</html>
+<script type="text/javascript">
+  var searchParams = new URLSearchParams(window.location.search);
+  $("#file_url").val(searchParams.get("fileurl"));
+  $("#file_name").val(searchParams.get("filename"));
+  jQuery.validator.addMethod("email", function(value, element) {
+  return this.optional(element) || /.+@kindle.com$/i.test(value);
+}, "Please enter a valid Kindle email address.");
+  $(function() {
+    $("#upload-form").validate();
+  });
+</script>
