@@ -151,6 +151,11 @@ textarea:hover {
   /*color: #b3aca7;*/
 }
 
+#footer p{
+  text-align: right;
+  margin-right: 10px;
+}
+
 /*#submit:hover {
   color: #e2dedb;
 }*/
