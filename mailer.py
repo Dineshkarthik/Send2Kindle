@@ -4,6 +4,7 @@ import sys
 import os
 import smtplib
 import urllib2
+from urlparse import urlparse
 from optparse import OptionParser
 from flask import Flask, request, redirect, url_for, render_template, session
 from email.MIMEMultipart import MIMEMultipart
@@ -44,23 +45,25 @@ def mailer(email, file_url, file_name):
     msg['From'] = fromaddr
     msg['To'] = toaddr
     part = MIMEBase('application', 'octet-stream')
-    req = urllib2.Request(
-        file_url,
-        headers={
-            'User-Agent':
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'
-        })
-    part.set_payload(urllib2.urlopen(req).read())
-    encoders.encode_base64(part)
-    part.add_header('Content-Disposition',
-                    "attachment; filename= %s" % file_name)
-    msg.attach(part)
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(fromaddr, password)
-    text = msg.as_string()
-    server.sendmail(fromaddr, toaddr, text)
-    server.quit()
+    parsed_uri = urlparse(file_url)
+    if parsed_uri.hostname == 'freetamilebooks.com':
+        req = urllib2.Request(
+            file_url,
+            headers={
+                'User-Agent':
+                'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'
+            })
+        part.set_payload(urllib2.urlopen(req).read())
+        encoders.encode_base64(part)
+        part.add_header('Content-Disposition',
+                        "attachment; filename= %s" % file_name)
+        msg.attach(part)
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(fromaddr, password)
+        text = msg.as_string()
+        server.sendmail(fromaddr, toaddr, text)
+        server.quit()
 
 
 if __name__ == "__main__":
