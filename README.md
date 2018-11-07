@@ -20,7 +20,7 @@ Send2Kindle uses a number of python in-built and opensource projects to work pro
 You need Python 2.*, its dependency packages, flask installed globally:
 
 ```sh
-$ https://github.com/Dineshkarthik/Send2Kindle.git
+$ git clone https://github.com/Dineshkarthik/Send2Kindle.git
 $ cd Send2Kindle
 $ pip install -r requirements.txt
 $ python mailer.py
